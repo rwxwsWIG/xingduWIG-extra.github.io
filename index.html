@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星都异闻录 · 神秘学协会</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ 入职画面 ============ -->
+<div id="intro-screen" class="fullscreen-layer intro-screen-dark">
+  <div class="intro-vignette"></div>
+  <div class="intro-card">
+    <div class="intro-tag">神秘学协会 · 线上委托处理部</div>
+    <h2>星都异闻录</h2>
+    <p class="intro-meta">外传 · 时间线：2066年12月 – 2067年3月</p>
+    <div class="intro-body">
+      <p>你叫<b>温言</b>，22岁，东里市人。</p>
+      <p>一个月前，你还是《东里晨报》的社会新闻实习生。因为一篇关于"社区老人集体失忆"的报道被压稿、被辞退。</p>
+      <p>三天前，你在一份报纸角落看到一则招聘：</p>
+      <p class="intro-quote">「神秘学协会 · 线上委托处理部 · 招募现象调查员<br>要求：会搜索 · 有耐心 · 不追问<br>报酬：面议」</p>
+      <p>你把简历投了出去。</p>
+      <p><b>你被录用了。</b></p>
+    </div>
+    <div class="intro-device">🖥️ 请使用电脑或平板游玩 · 🎧 建议佩戴耳机</div>
+    <div class="diff-row">
+      <button class="btn btn-primary btn-lg diff-btn" data-action="start-game" data-arg="easy">
+        <span class="diff-t">🙂 简单难度</span>
+        <span class="diff-d">委托步骤有提示</span>
+      </button>
+      <button class="btn btn-lg diff-btn" data-action="start-game" data-arg="normal">
+        <span class="diff-t">😐 普通难度</span>
+        <span class="diff-d">无辅助 · 纯靠推理</span>
+      </button>
+    </div>
+    <div class="diff-note">选择难度后开始 · 两种难度剧情完全一致</div>
+  </div>
+</div>
+
+
+<!-- ============ 入职问卷 ============ -->
+<div id="questionnaire-screen" class="fullscreen-layer hidden">
+  <div class="intro-card">
+    <div class="intro-tag">神秘学协会 · 在线委托处理部</div>
+    <h2 style="font-size:28px;letter-spacing:4px">入职问卷</h2>
+    <div class="q-container">
+      <div class="q-item">
+        <div class="q-label">1. 您的姓名：</div>
+        <div class="q-answer">温言</div>
+      </div>
+      <div class="q-item">
+        <div class="q-label">2. 您的年龄：</div>
+        <div class="q-answer">22</div>
+      </div>
+      <div class="q-item">
+        <div class="q-label">3. 您的籍贯：</div>
+        <div class="q-answer">东里市</div>
+      </div>
+      <div class="q-item">
+        <div class="q-label">4. 您是否愿意为协会保密：</div>
+        <div class="q-answer">是</div>
+      </div>
+      <div class="q-item q-weird">
+        <div class="q-label">5. 您是否记得自己的童年：</div>
+        <div class="q-choices" id="q5-choices">
+          <button class="q-choice-btn" data-action="q5-select" data-arg="记得很清楚">记得很清楚</button>
+          <button class="q-choice-btn" data-action="q5-select" data-arg="有些模糊">有些模糊</button>
+          <button class="q-choice-btn" data-action="q5-select" data-arg="完全不记得">完全不记得</button>
+        </div>
+        <input type="hidden" id="q5-input">
+      </div>
+    </div>
+    <div id="q-error" class="q-error hidden">⚠ 请完整填写所有问题。</div>
+    <button class="btn btn-primary btn-lg" data-action="submit-questionnaire" style="margin-top:18px">提交</button>
+  </div>
+</div>
+
+<!-- ============ 白色房间（反转） ============ -->
+<div id="whiteroom-screen" class="fullscreen-layer hidden">
+  <div class="wr-terminal">
+    <div class="wr-skip" data-action="wr-skip">⏭ 跳过</div>
+    <div class="wr-lines" id="wr-lines"></div>
+    <div class="wr-choices hidden" id="wr-choices">
+      <div class="wr-choice" data-action="wr-choice" data-arg="A">
+        <div class="wc-name">协会员工档案</div>
+        <div class="wc-desc">归档 · 继续做温言</div>
+      </div>
+      <div class="wr-choice" data-action="wr-choice" data-arg="B">
+        <div class="wc-name">水底针的私信</div>
+        <div class="wc-desc">泄密 · 告诉世界真相</div>
+      </div>
+      <div class="wr-choice" data-action="wr-choice" data-arg="C">
+        <div class="wc-name">删除键</div>
+        <div class="wc-desc">消失 · 抹掉自己</div>
+      </div>
+      <div class="wr-choice wr-choice-hidden" data-action="wr-choice" data-arg="D">
+        <div class="wc-name">（什么也不选）</div>
+        <div class="wc-desc">追问下去</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 工作台 ============ -->
+<div id="desk-screen" class="hidden">
+  <!-- 顶栏 -->
+  <div id="top-bar">
+    <div class="tb-brand">
+      <span class="tb-logo">✦</span>
+      <span class="tb-name">神秘学协会 · 线上委托处理部</span>
+    </div>
+    <div class="tb-stats">
+      <span>员工：<b>温言</b></span>
+      <span>已完成：<b id="tb-done">0</b> / 9</span>
+    </div>
+  </div>
+
+  <div id="workbench">
+    <!-- 左侧：委托列表 -->
+    <aside id="case-list">
+      <div class="cl-head">📋 委托列表</div>
+      <div id="case-items"></div>
+      <div class="cl-footer">
+        <span>部门：<b>在线委托处理部</b></span>
+        <span>主管：常姐</span>
+      </div>
+    </aside>
+
+    <!-- 中间：工作区 -->
+    <main id="work-area">
+      <div id="work-empty" class="work-empty">
+        <div class="we-icon">📁</div>
+        <div class="we-title">选择一份委托开始工作</div>
+        <div class="we-sub">左侧列表中点击任一委托</div>
+      </div>
+      <div id="work-content" class="hidden"></div>
+    </main>
+
+    <!-- 右侧：工具箱 -->
+    <aside id="tool-box">
+      <div class="tx-block">
+        <div class="tx-title">🔍 信息检索</div>
+        <div class="tx-search">
+          <input id="search-input" placeholder="输入关键词…" autocomplete="off">
+          <button class="btn btn-primary" data-action="do-search">搜索</button>
+        </div>
+        <div class="tx-hint" id="search-hint">信息来源：公开网络 · 协会档案库</div>
+      </div>
+      <div class="tx-block">
+        <div class="tx-title">💬 协会通讯</div>
+        <div id="chat-log" class="chat-log"></div>
+      </div>
+      <div class="tx-block" id="judge-cards"></div>
+    </aside>
+  </div>
+
+  <div id="bottom-bar">
+    <span id="bb-status">系统就绪 · 等待接单</span>
+    <span id="bb-clock">2066-12-01 09:00</span>
+  </div>
+</div>
+
+<!-- ============ 结局 ============ -->
+<div id="ending-screen" class="fullscreen-layer hidden">
+  <div class="ending-inner">
+    <div class="ending-tag" id="ending-tag">结局达成</div>
+    <h2 id="ending-title"></h2>
+    <div class="ending-body" id="ending-body"></div>
+    <div class="ending-quote" id="ending-quote"></div>
+    <button class="btn btn-primary btn-lg" data-action="restart">重新开始</button>
+    <!-- 作者寄语：本期暂不开放，按钮保留占位并置灰 -->
+    <button class="btn btn-lg" disabled style="margin-top:10px">📖 作者寄语 · 暂不开放</button>
+    <button class="btn btn-lg" data-action="fast-forward" style="margin-top:10px">↩ 重新选择结局</button>
+  </div>
+</div>
+
+<!-- ============ 作者寄语（暂不开放） ============ -->
+<div id="afterword-screen" class="fullscreen-layer hidden">
+  <div class="afterword-inner">
+    <div class="aw-tag">作者寄语</div>
+    <div class="aw-body" id="aw-body"></div>
+    <button class="btn btn-primary btn-lg" data-action="restart">重新开始</button>
+  </div>
+</div>
+
+<div id="toast-area"></div>
+<script src="game.js"></script>
+</body>
+</html>
