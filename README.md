@@ -161,4 +161,4 @@ python .test/build_docx.py && python .test/verify_docx.py
 
 - 本作内容纯属虚构，人物、机构、事件均不存在。
 - 部分背景素材由 AI 生成。
-- 建议游玩正传第 1 部《代号：双子》→ [miyeji.cn](https://miyeji.cn/games/xing-dou-shuang-zi)
+- 建议游玩正传第 1 部《星都双子》→ [miyeji.cn](https://miyeji.cn/games/xing-dou-shuang-zi)
