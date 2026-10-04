@@ -73,26 +73,6 @@ npx serve .
 
 ---
 
-## 🧪 运行测试
-
-需要 Node.js + jsdom：
-
-```bash
-npm i jsdom
-
-# 仅跑关键词审计：确认每条线索的关键词在触发前都能看到
-NODE_PATH=./node_modules node .test/audit_keywords.js
-
-# 跑完整回归：审计 + 简单/普通双难度全流程通关（入门→9主线→隐藏委托→终章→四结局）
-NODE_PATH=./node_modules node .test/playtest_r5.js
-```
-
-生成攻略文档（可选，需 Python）：
-
-```bash
-python .test/build_docx.py && python .test/verify_docx.py
-```
-
 ---
 
 ## 📖 委托一览
