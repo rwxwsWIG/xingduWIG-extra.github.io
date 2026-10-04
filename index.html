@@ -24,6 +24,7 @@
       <p><b>你被录用了。</b></p>
     </div>
     <div class="intro-device">🖥️ 请使用电脑或平板游玩 · 🎧 建议佩戴耳机</div>
+    <a class="intro-rec" href="https://miyeji.cn/games/xing-dou-shuang-zi" target="_blank" rel="noopener">📖 建议游玩<b>正传第1部</b>，剧情更沉浸 →</a>
     <div class="diff-row">
       <button class="btn btn-primary btn-lg diff-btn" data-action="start-game" data-arg="easy">
         <span class="diff-t">🙂 简单难度</span>
@@ -40,7 +41,8 @@
 
 
 <!-- ============ 入职问卷 ============ -->
-<div id="questionnaire-screen" class="fullscreen-layer hidden">
+<div id="questionnaire-screen" class="fullscreen-layer intro-screen-dark hidden">
+  <div class="intro-vignette"></div>
   <div class="intro-card">
     <div class="intro-tag">神秘学协会 · 在线委托处理部</div>
     <h2 style="font-size:28px;letter-spacing:4px">入职问卷</h2>
@@ -73,6 +75,21 @@
     </div>
     <div id="q-error" class="q-error hidden">⚠ 请完整填写所有问题。</div>
     <button class="btn btn-primary btn-lg" data-action="submit-questionnaire" style="margin-top:18px">提交</button>
+  </div>
+</div>
+
+<!-- ============ 新人教程（委托 01 前） ============ -->
+<div id="tutorial-screen" class="fullscreen-layer intro-screen-dark hidden">
+  <div class="intro-vignette"></div>
+  <div class="intro-card tu-card">
+    <div class="intro-tag">神秘学协会 · 新人培训</div>
+    <h2 style="font-size:26px;letter-spacing:4px" id="tu-title">上岗须知</h2>
+    <div class="tu-body" id="tu-body"></div>
+    <div class="tu-dots" id="tu-dots"></div>
+    <div class="tu-footer">
+      <button class="tu-skip" data-action="tutorial-skip">跳过教程 →</button>
+      <button class="btn btn-primary" data-action="tutorial-next" id="tu-next">下一步</button>
+    </div>
   </div>
 </div>
 

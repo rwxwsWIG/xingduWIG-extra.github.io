@@ -1032,7 +1032,25 @@ input { font-family: var(--font-sans); }
 
 /* === 简介页氛围 === */
 .intro-screen-dark {
-  background: radial-gradient(ellipse at 50% 30%, #1a1a2e 0%, #0d0d1a 60%, #050508 100%);
+  background:
+    linear-gradient(rgba(8, 10, 18, .35), rgba(5, 6, 12, .6)),
+    url("assets/bg-intro.jpg") center / cover no-repeat,
+    radial-gradient(ellipse at 50% 30%, #1a1a2e 0%, #0d0d1a 60%, #050508 100%);
+}
+/* === 正传推荐链接 === */
+.intro-rec {
+  display: block; margin-bottom: 20px;
+  font-size: 13.5px; line-height: 1.6;
+  color: var(--red); text-decoration: none;
+  border: 1px solid rgba(138,58,42,.35); border-radius: 8px;
+  padding: 10px 14px; background: rgba(138,58,42,.06);
+  transition: all .15s;
+}
+.intro-rec b { color: var(--red); }
+.intro-rec:hover {
+  background: rgba(138,58,42,.14); border-color: var(--red);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(138,58,42,.18);
 }
 .intro-vignette {
   position: absolute; inset: 0; pointer-events: none;
@@ -1043,6 +1061,40 @@ input { font-family: var(--font-sans); }
   background: rgba(255, 250, 240, 0.97);
   box-shadow: 0 0 60px rgba(212, 175, 55, .15), 0 20px 60px rgba(0,0,0,.5);
 }
+
+/* === 新人教程 === */
+.tu-card { max-width: 640px; width: min(92vw, 640px); }
+.tu-body {
+  min-height: 240px; margin-top: 14px;
+  font-size: 15px; line-height: 1.9; color: var(--ink);
+  animation: tu-fade .35s ease;
+}
+.tu-body p { margin: 0 0 10px; }
+.tu-body b { color: var(--red); }
+.tu-body .tu-tip {
+  margin-top: 14px; padding: 10px 14px;
+  font-size: 13px; color: #6b5a34;
+  border-left: 3px solid var(--gold); background: var(--gold-soft);
+  border-radius: 0 6px 6px 0;
+}
+.tu-list { margin: 0 0 10px; padding-left: 22px; }
+.tu-list li { margin-bottom: 4px; }
+@keyframes tu-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.tu-dots { display: flex; gap: 8px; justify-content: center; margin: 18px 0 14px; }
+.tu-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--line); transition: all .25s;
+}
+.tu-dot.past { background: #b08c2a; opacity: .85; }
+.tu-dot.on { background: var(--red); transform: scale(1.25); }
+.tu-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.tu-skip {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-mono); font-size: 12.5px;
+  color: var(--ink-dim); padding: 8px 4px;
+  transition: color .15s;
+}
+.tu-skip:hover { color: var(--red); }
 
 
 .glitch-text {

@@ -53,6 +53,80 @@ const $ = (s) => document.querySelector(s);
 const has = (f) => !!S.flags[f];
 const esc = (s) => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 
+/* ---------------- 新人教程（委托 01 前） ---------------- */
+const TUTORIAL_STEPS = [
+  {
+    title: "上岗须知 · 欢迎入职",
+    body: `<p>欢迎加入<b>神秘学协会 · 在线委托处理部</b>。你是新任档案管理员<b>温言</b>。</p>
+      <p>在这里，你不会遇到鬼——协会的观点是，世上只有<b>「尚未被记录的现象」</b>。你的工作，是把它们记录、分类、归档。</p>
+      <p class="tu-tip">接下来的几页会教你工作的全部流程，只需 1 分钟。</p>`,
+  },
+  {
+    title: "委托列表 · 依次解锁",
+    body: `<p>进入工作台后，<b>左侧</b>是委托列表。开局只有<b>「委托 01」</b>开放，其余处于锁定状态。</p>
+      <p>规则：<b>完成上一份委托，自动解锁下一份</b>。共 9 份主线委托。</p>
+      <p class="tu-tip">已完成的委托随时可以重新打开回看，不会丢失。</p>`,
+  },
+  {
+    title: "信息检索 · 找出线索",
+    body: `<p>打开一份委托后，先读<b>现象描述</b>和委托人的补充说明。</p>
+      <p>然后使用<b>右下角的「信息检索」</b>：输入你在委托文本中看到的关键词（人名、日期、物件……），回车搜索。</p>
+      <p>每份委托有<b>所需线索数</b>，在进度条中显示。找齐线索才能提交归档。</p>
+      <p class="tu-tip">所有关键词都藏在游戏文本里——读得越仔细，找得越快。</p>`,
+  },
+  {
+    title: "分类归档 · 判定卡",
+    body: `<p>线索凑齐后，你要判断这个现象属于哪一类：</p>
+      <ul class="tu-list">
+        <li><b>遗物</b> — 物件本身异常</li>
+        <li><b>目击</b> — 只有特定视角捕捉到</li>
+        <li><b>地点</b> — 异常附着在特定空间</li>
+        <li><b>声音</b> — 只有声音，没有实体</li>
+        <li><b>群体</b> — 与一群人相关</li>
+      </ul>
+      <p>拿不准时，看<b>右下角的「判定卡」</b>五连问，逐一对照即可。</p>`,
+  },
+  {
+    title: "最后 · 开始工作",
+    body: `<p>右侧聊天区里，主管<b>常姐</b>会在关键时刻给你提示——留意她的消息。</p>
+      <p>难度决定检索提示的多少，不影响剧情。<b>不要追问</b>，是这里唯一的规矩。</p>
+      <p class="tu-tip">培训结束。左侧选择「委托 01」，开始你的第一份工作。</p>`,
+  },
+];
+let tuStep = 0;
+
+function renderTutorial() {
+  const st = TUTORIAL_STEPS[tuStep];
+  S.tuStep = tuStep;
+  $("#tu-title").textContent = st.title;
+  $("#tu-body").innerHTML = st.body;
+  $("#tu-dots").innerHTML = TUTORIAL_STEPS.map((_, i) =>
+    `<span class="tu-dot${i === tuStep ? " on" : i < tuStep ? " past" : ""}"></span>`).join("");
+  $("#tu-next").textContent = tuStep === TUTORIAL_STEPS.length - 1 ? "开始工作 ✓" : "下一步";
+  $("#tu-next").dataset.arg = String(tuStep);
+  beep(660, .05, .03);
+}
+
+function finishTutorial() {
+  S.flags.tutorial_done = true;
+  $("#tutorial-screen").classList.add("hidden");
+  enterDesk();
+}
+
+function enterDesk() {
+  $("#desk-screen").classList.remove("hidden");
+  S.started = true;
+  renderAll();
+  ding();
+  setTimeout(() => {
+    pushChat("sys", "", "系统记录：受访者第5题回答已存档。");
+  }, 600);
+  setTimeout(() => {
+    pushChat("people", "常姐", "第5题不用认真填。所有新人都不记得自己最早的画面。这是我们这份工作的职业病。");
+  }, 1600);
+  setTimeout(() => toast("✦ 欢迎入职", "从左侧选择「委托 01」开始工作。", "", 6000), 2600);
+}
+
 /* ---------------- 音效 ---------------- */
 let _ac = null;
 function ac() { if (!_ac) _ac = new (window.AudioContext || window.webkitAudioContext)(); return _ac; }
@@ -119,8 +193,8 @@ const CASES = [
     ],
     quote: "「我妈带她去过所有医院。所有报告都说她是个 18 岁的女孩。可她今年 32 了。」",
     briefAfter: ["苏瑶说妹妹 14 年前去过一次临港市，回来后就没有再长过一岁。苏瑶今年 35 岁，比妹妹大 3 岁。",
-      "苏瑶还提到：临港市2048年搞过一次什么仪式，所有孩子都要参加。妹妹就是那次之后开始不变的。",
-      "苏瑶最后说：她好像不是她，又好像是另一个人——就像一份被复制的档案。"],
+      "苏瑶还提到：临港市2048年搞过一次什么「<b>成人礼</b>」，所有孩子都要参加。妹妹就是那次之后开始不变的。",
+      "苏瑶最后说：她好像不是她，又好像是另一个人——就像原版被收走、留下的一份<b>备份</b>。"],
     clues: [
       { key: ["32", "真实年龄", "年龄", "18"], text: "14 年前苏琳 18 岁，14 年后她应该是 32 岁。但她的生理年龄仍然是 18 岁。临港市 2034 年曾有一批新生儿被登记为「无出生档案」。这批新生儿的共同点：父母在同年签署过一份协议。", source: "协会档案 · 临港 2034-001" },
       { key: ["成人礼", "成人礼测试"], text: "「成人礼」是临港市 2048 年启动的一项青少年评估制度，由<b>辰天生物</b>与临港市卫生局联合推行。未通过评估的青少年，将被统一送往「海外深造」。但协会档案中，「海外深造」的所有记录均为<b>空白</b>。", source: "协会档案 · 制度记录" },
@@ -189,6 +263,7 @@ const CASES = [
     ],
     quote: "「我编辑了 20 年地图。一个地方不可能同时存在又不存在。除非——它不是地方。」",
     briefAfter: ["编辑者最后一条消息：「他们改了我的记忆。但地图记得。」加密坐标：39°54′XX″N 116°23′YY″E，与东里市档案馆分馆（39°54′18″N 116°23′36″E）相距 4.7 公里。",
+      "协会调出 2066 年 11 月的一份旧地图快照，角落印着一行模糊的印刷坐标：<b>39°55′□□″N 116°26′□□″E</b>——分秒位被水渍晕开了。",
       "编辑者说：那个地方不在物理地图上，它在档案系统的夹层里——像一个隐藏的文件夹。",
       "有人在暗网提过一个名字：回声会。他们在维护那个地方。"],
     clues: [
@@ -212,7 +287,8 @@ const CASES = [
       "监控显示每天 <b>18:00</b> 有人打卡离开。但门禁记录里，查不到这个人。",
     ],
     quote: "「我数过了。那杯咖啡从来没人喝。但它每天早上都是热的。」",
-    briefAfter: ["委托人补了一句：「而且没人记得那个工位是谁的。我问了整层楼，所有人都说『那不是我的位置』。」"],
+    briefAfter: ["委托人补了一句：「而且没人记得那个工位是谁的。我问了整层楼，所有人都说『那不是我的位置』。我去<b>人事</b>部查过登记，那边只回了一句：『该工位信息不对外。』」",
+      "「对了，还有件小事。档案室的<b>椅子</b>明明只有 6 把。但每天早上进去，总觉得比下班时多了一把。」"],
     hint: "那个工位，为什么没有人记得它属于谁？",
     clues: [
       { key: ["咖啡", "叙旧"], text: "「叙旧」牌速溶咖啡，2066 年 11 月才注册商标。唯一供货方是<b>辰天集团后勤部</b>。协会从未采购过该品牌。", source: "星都公共信息网 · 商品检索" },
@@ -236,7 +312,8 @@ const CASES = [
       "每次测绘结果都不一样，但墙体上没有任何施工痕迹。",
     ],
     quote: "「我量了三次。第一次 18 平，第二次 25 平，昨天量是 32 平。我没装修。它自己长的。」",
-    briefAfter: ["周女士翻出了三份测绘报告，说：「报告是不同的人来量的，但编号连得特别顺。我当时觉得奇怪。」"],
+    briefAfter: ["周女士翻出了三份测绘报告，说：「报告是不同的人来量的，但编号连得特别顺。我当时觉得奇怪。」",
+      "「这间屋子前前后后换过七任<b>租客</b>。都说走就走，押金也没回来拿。」"],
     hint: "量一量。它到底变大了多少？",
     clues: [
       { key: ["18", "面积", "平方"], text: "2048 年首次测绘记录为 <b>18㎡</b>。测绘方是<b>辰天测绘</b>。", source: "协会档案 · 房产测绘" },
@@ -1175,18 +1252,18 @@ document.addEventListener("click", (e) => {
       }
       $("#q-error").classList.add("hidden");
       $("#questionnaire-screen").classList.add("hidden");
-      $("#desk-screen").classList.remove("hidden");
-      S.started = true;
-      renderAll();
-      ding();
-      setTimeout(() => {
-        pushChat("sys", "", "系统记录：受访者第5题回答已存档。");
-      }, 600);
-      setTimeout(() => {
-        pushChat("people", "常姐", "第5题不用认真填。所有新人都不记得自己最早的画面。这是我们这份工作的职业病。");
-      }, 1600);
-      setTimeout(() => toast("✦ 欢迎入职", "从左侧选择「委托 01」开始工作。", "", 6000), 2600);
+      // 委托 01 前：新人教程（可跳过）
+      tuStep = 0;
+      $("#tutorial-screen").classList.remove("hidden");
+      renderTutorial();
     },
+    "tutorial-next": () => {
+      tuStep = parseInt(arg, 10) || 0;
+      if (tuStep >= TUTORIAL_STEPS.length - 1) { finishTutorial(); return; }
+      tuStep++;
+      renderTutorial();
+    },
+    "tutorial-skip": () => finishTutorial(),
     "select-case": () => selectCase(parseInt(arg, 10)),
     "select-class": () => {
       const c = CASES[S.activeCase];
