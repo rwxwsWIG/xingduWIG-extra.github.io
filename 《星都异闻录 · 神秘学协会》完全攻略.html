@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《星都异闻录 · 神秘学协会》完全攻略</title>
+<style>
+:root {
+  --paper: #f5efe2; --paper-deep: #efe6d2; --ink: #2e2418; --ink-dim: #8a7a60;
+  --red: #8a3a2a; --gold: #c9a227; --gold-soft: rgba(212,175,55,.12);
+  --line: #d8c9a8; --night: #14111c;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: var(--ink); line-height: 1.85; font-size: 15px;
+  background:
+    radial-gradient(ellipse at 50% -10%, #2a2136 0%, var(--night) 60%, #0b0912 100%);
+}
+/* ===== 顶栏 ===== */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 12px 28px;
+  background: rgba(20,17,28,.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(212,175,55,.25);
+}
+.topbar .brand { font-size: 14px; letter-spacing: 3px; color: #e8d5a8; }
+.topbar .brand em { font-style: normal; color: var(--gold); }
+.topbar .actions { display: flex; gap: 10px; }
+.topbar button {
+  font-family: inherit; font-size: 12.5px; cursor: pointer;
+  color: #e8d5a8; background: none; border: 1px solid rgba(212,175,55,.4);
+  border-radius: 6px; padding: 6px 14px; transition: all .2s;
+}
+.topbar button:hover { border-color: var(--gold); background: rgba(212,175,55,.12); }
+/* ===== 防剧透遮罩 ===== */
+.veil {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(11,9,18,.97); transition: opacity .5s;
+}
+.veil.off { opacity: 0; pointer-events: none; }
+.veil-card {
+  max-width: 460px; margin: 20px; text-align: center;
+  background: var(--paper); border-radius: 14px; padding: 40px 36px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+.veil-card .vt { font-size: 22px; letter-spacing: 4px; color: var(--red); margin-bottom: 14px; }
+.veil-card p { font-size: 13.5px; color: var(--ink-dim); margin-bottom: 8px; }
+.veil-card button {
+  margin-top: 18px; font-family: inherit; cursor: pointer;
+  font-size: 15px; letter-spacing: 2px; color: #fff;
+  background: var(--red); border: none; border-radius: 8px; padding: 12px 34px;
+  transition: all .2s;
+}
+.veil-card button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(138,58,42,.4); }
+/* ===== 布局 ===== */
+.layout { display: flex; max-width: 1280px; margin: 0 auto; align-items: flex-start; }
+aside.toc {
+  position: sticky; top: 61px; flex: 0 0 250px;
+  max-height: calc(100vh - 61px); overflow-y: auto;
+  padding: 28px 12px 40px 24px; border-right: 1px solid rgba(212,175,55,.15);
+}
+aside.toc .toc-title { font-size: 12px; letter-spacing: 3px; color: var(--ink-dim); margin-bottom: 12px; padding-left: 12px; }
+a.toc-link {
+  display: block; padding: 6px 12px; border-radius: 6px;
+  font-size: 13px; color: #cbbfa4; text-decoration: none;
+  border-left: 2px solid transparent; transition: all .15s;
+}
+a.toc-link:hover { color: #fff; background: rgba(212,175,55,.1); }
+main.paper {
+  flex: 1; min-width: 0; margin: 36px 24px 80px;
+  background: var(--paper); border-radius: 16px;
+  padding: 56px 60px 70px;
+  box-shadow: 0 0 60px rgba(212,175,55,.12), 0 30px 80px rgba(0,0,0,.5);
+}
+@media (max-width: 900px) {
+  aside.toc { display: none; }
+  main.paper { margin: 20px 12px 60px; padding: 32px 22px 50px; }
+}
+/* ===== 文档元素 ===== */
+.doc-title { font-size: 30px; letter-spacing: 6px; text-align: center; font-weight: 400; color: var(--ink); }
+.doc-sub { text-align: center; font-size: 13px; color: var(--ink-dim); margin-top: 10px; }
+.doc-h1 {
+  font-size: 20px; letter-spacing: 2px; font-weight: 400; color: var(--red);
+  margin: 44px 0 16px; padding-bottom: 8px; border-bottom: 1.5px solid var(--line);
+  scroll-margin-top: 70px;
+}
+.anchor { font-size: 14px; color: var(--line); text-decoration: none; margin-left: 10px; opacity: 0; transition: opacity .15s; }
+.doc-h1:hover .anchor { opacity: 1; }
+.doc-h2 { font-size: 16px; font-weight: 400; color: var(--ink); margin: 26px 0 10px; }
+p { margin: 10px 0; }
+em.hl { font-style: normal; color: var(--red); }
+blockquote {
+  margin: 14px 0; padding: 10px 18px; font-style: italic;
+  color: var(--red); border-left: 3px solid var(--red); background: rgba(138,58,42,.05);
+  border-radius: 0 8px 8px 0;
+}
+ul { margin: 10px 0 10px 24px; }
+li { margin: 4px 0; }
+.doc-note {
+  margin: 12px 0; padding: 10px 16px; font-size: 13px; color: #6b5a34;
+  border-left: 3px solid var(--gold); background: var(--gold-soft);
+  border-radius: 0 6px 6px 0;
+}
+.doc-mono {
+  font-family: Consolas, monospace; font-size: 12.5px; margin: 8px 0;
+  padding: 8px 14px; background: var(--paper-deep); border-radius: 6px;
+  overflow-x: auto; white-space: pre-wrap;
+}
+.tbl-wrap { overflow-x: auto; margin: 16px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+th { background: var(--red); color: #fff; letter-spacing: 1px; white-space: nowrap; }
+tr:nth-child(even) td { background: rgba(216,201,168,.12); }
+.toc-guide-note {
+  margin-top: 40px; padding-top: 18px; border-top: 1px dashed var(--line);
+  font-size: 12px; color: var(--ink-dim); text-align: center;
+}
+@media print {
+  body { background: #fff; }
+  .topbar, aside.toc, .veil { display: none !important; }
+  main.paper { margin: 0; box-shadow: none; border-radius: 0; padding: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="veil" id="veil">
+  <div class="veil-card">
+    <div class="vt">⚠️ 剧透警告</div>
+    <p>本页包含全部委托的关键词、线索与分类答案。</p>
+    <p>建议先自行游玩，再回来对照。</p>
+    <button onclick="document.getElementById('veil').classList.add('off')">我已通关，查看攻略</button>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="brand">星都异闻录 · 神秘学协会 <em>完全攻略</em></div>
+  <div class="actions">
+    <button onclick="document.getElementById('veil').classList.remove('off')">🫥 遮住剧透</button>
+    <button onclick="window.print()">🖨 打印</button>
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ 顶部</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="toc">
+    <div class="toc-title">目 录</div>
+    <a class="toc-link" href="#sec-0">开局</a><a class="toc-link" href="#sec-1">新人教程（委托 01 前）</a><a class="toc-link" href="#sec-2">委托总览与解锁规则</a><a class="toc-link" href="#sec-3">分类器与判定卡</a><a class="toc-link" href="#sec-4">委托 01 · 不会说再见的人</a><a class="toc-link" href="#sec-5">委托 02 · 停在十八岁的女孩</a><a class="toc-link" href="#sec-6">委托 03 · 被删除的第十三条</a><a class="toc-link" href="#sec-7">委托 04 · 镜子里多出来的影子</a><a class="toc-link" href="#sec-8">委托 05 · 没有正门的房子</a><a class="toc-link" href="#sec-9">委托 06 · 从不下班的同事</a><a class="toc-link" href="#sec-10">委托 07 · 会自己长大的房间</a><a class="toc-link" href="#sec-11">委托 08 · 凌晨四点的电台</a><a class="toc-link" href="#sec-12">委托 09 · 一百二十七个签名</a><a class="toc-link" href="#sec-13">隐藏委托 · 第二次入职</a><a class="toc-link" href="#sec-14">委托 10 · 辰天集团的服务器（自动触发）</a><a class="toc-link" href="#sec-15">白色房间 · 反转</a><a class="toc-link" href="#sec-16">四结局</a><a class="toc-link" href="#sec-17">贯穿全作的三条数字线</a><a class="toc-link" href="#sec-18">注意事项</a><a class="toc-link" href="#sec-19">通关时长参考</a>
+  </aside>
+  <main class="paper">
+    <h1 class="doc-title">《星都异闻录 · 神秘学协会》完全攻略</h1><p class="doc-sub">外传 · 时间线：2066年12月 – 2067年3月</p><p class="doc-sub">九委托 + 隐藏委托 · 三密码入侵 · 白色房间反转 · 四结局</p><h2 id="sec-0" class="doc-h1">开局<a class="anchor" href="#sec-0">#</a></h2><p>难度：简单 / 普通。剧情完全一致，区别只在「搜索未命中时是否给方向提示」。</p><ul><li>简单难度：未命中会给出模糊提示（如「算算她的年龄」），委托详情页另有一条「💡 检索方向」提示条。</li><li>普通难度：不给任何方向提示，纯靠推理。</li></ul><p>入职问卷第 5 题：三选一（记得很清楚 / 有些模糊 / 完全不记得）——选哪个都行，常姐会说「所有新人都不记得」。</p><p class="doc-note">第 5 题的答案会被系统存档，并在白色房间反转时被回指。</p><h2 id="sec-1" class="doc-h1">新人教程（委托 01 前）<a class="anchor" href="#sec-1">#</a></h2><p>提交入职问卷后、进入委托 01 之前，会弹出 5 页「新人培训 · 上岗须知」，讲解委托列表、信息检索、分类归档与判定卡的全部玩法。</p><div class="tbl-wrap"><table><tr><th>页</th><th>标题</th><th>内容</th></tr><tr><td>1</td><td>上岗须知 · 欢迎入职</td><td>协会世界观：世上只有「尚未被记录的现象」，工作是记录、分类、归档</td></tr><tr><td>2</td><td>委托列表 · 依次解锁</td><td>开局仅委托 01 开放，完成上一份自动解锁下一份；已完成委托可随时回看</td></tr><tr><td>3</td><td>信息检索 · 找出线索</td><td>读现象描述 → 右下角检索框输入关键词 → 凑齐所需线索数</td></tr><tr><td>4</td><td>分类归档 · 判定卡</td><td>五类现象（遗物/目击/地点/声音/群体）与判定卡五连问</td></tr><tr><td>5</td><td>最后 · 开始工作</td><td>留意常姐的聊天提示；难度不影响剧情</td></tr></table></div><ul><li>不想看教程：点击左下角「跳过教程 →」可一键跳过，直接进入工作台。</li><li>逐页浏览：右下角「下一步」翻页，底部圆点显示进度，最后一页为「开始工作 ✓」。</li></ul><h2 id="sec-2" class="doc-h1">委托总览与解锁规则<a class="anchor" href="#sec-2">#</a></h2><p>本作共 9 个主线委托 + 1 个隐藏委托，外加 1 个自动触发的终章。</p><div class="tbl-wrap"><table><tr><th>委托</th><th>标题</th><th>类型</th><th>线索数</th><th>正确分类</th><th>触发条件</th></tr><tr><td>01</td><td>不会说再见的人</td><td>遗物</td><td>4</td><td>遗物</td><td>初始</td></tr><tr><td>02</td><td>停在十八岁的女孩</td><td>目击</td><td>4</td><td>目击</td><td>完成 01</td></tr><tr><td>03</td><td>被删除的第十三条</td><td>遗物（数字）</td><td>4</td><td>遗物</td><td>完成 02</td></tr><tr><td>04</td><td>镜子里多出来的影子</td><td>地点</td><td>4</td><td>地点</td><td>完成 03</td></tr><tr><td>05</td><td>没有正门的房子</td><td>地点</td><td>4</td><td>地点</td><td>完成 04</td></tr><tr><td>06</td><td>从不下班的同事</td><td>目击</td><td>5（需 4）</td><td>目击</td><td>完成 05</td></tr><tr><td>07</td><td>会自己长大的房间</td><td>地点</td><td>4</td><td>地点</td><td>完成 06</td></tr><tr><td>08</td><td>凌晨四点的电台</td><td>声音</td><td>4</td><td>声音</td><td>完成 07</td></tr><tr><td>09</td><td>一百二十七个签名</td><td>群体</td><td>4</td><td>群体</td><td>完成 08</td></tr><tr><td>隐藏</td><td>第二次入职</td><td>遗物</td><td>4</td><td>遗物</td><td>完成任意 4 个委托后，通讯收到无发件人消息</td></tr><tr><td>10</td><td>辰天集团的服务器</td><td>服务器入侵</td><td>4（自动）</td><td>—</td><td>完成全部 9 个主线委托后自动触发</td></tr></table></div><p>关键规则：</p><ul><li>全部 9 个主线委托依次解锁：必须完成上一份，才能解锁下一份（01 → 02 → … → 09）。</li><li>通关门槛是 9 个主线委托。只完成 4 个（含隐藏）不会触发终章。</li><li>隐藏委托「第二次入职」不计入 9 个通关委托，但完成后会影响白色房间的日志内容。</li></ul><h2 id="sec-3" class="doc-h1">分类器与判定卡<a class="anchor" href="#sec-3">#</a></h2><p>本作共有 5 种现象分类。每个委托只认唯一的正确答案。</p><div class="tbl-wrap"><table><tr><th>分类</th><th>判定标准</th><th>典型例子</th></tr><tr><td>遗物</td><td>异常附着在物品上</td><td>录音机、帖子、档案</td></tr><tr><td>目击</td><td>异常只被特定视角捕捉</td><td>监控、镜子、旁人</td></tr><tr><td>地点</td><td>异常附着在特定空间</td><td>巷子、房子、坐标</td></tr><tr><td>声音</td><td>异常只以听觉形式存在，无实体载体</td><td>电台、频段</td></tr><tr><td>群体</td><td>异常与一群人相关，个体无法单独解释</td><td>签名、名单</td></tr></table></div><p>不确定时自问这五句（工具箱下方也常驻这张判定卡）：</p><ul><li>你能带走它吗？ → 遗物</li><li>只有你或摄像头看得到？ → 目击</li><li>换个人去还在吗？ → 地点</li><li>只有声音，没有实体？ → 声音</li><li>一个人查不明白？ → 群体</li></ul><h2 id="sec-4" class="doc-h1">委托 01 · 不会说再见的人<a class="anchor" href="#sec-4">#</a></h2><p>委托人：陈伯（东里市，72岁）</p><p>现象：老式录音机循环播放「明天见」，只有一个键能用——播放键。机器标签写着「收于 1987.10.15」，背面手写「东里七小 · 教师办公室」。</p><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>19871016 / 1987.10.15</td><td>1987年10月16日东里市第七小学火灾，一名女教师死亡，最后一句「同学们，明天见」</td></tr><tr><td>东里七小 / 第七小学 / 七小</td><td>学校1988年停办，旧址为档案馆分馆，辰天建设承建，编号 CT-1988-0031</td></tr><tr><td>T-1200 / 录音机</td><td>录音机型号T-1200，东里市无线电厂1987年出厂</td></tr><tr><td>1987 / 火灾 / 教师</td><td>1987年10月15日是录音机被「收走」的日子</td></tr></table></div><p>正确分类：遗物</p><p class="doc-note">协会内部备注：遗物与东里七小火灾相关 · 建议追踪档案馆分馆。</p><p>伏笔：档案馆分馆的地下档案室，会在委托 05 被回指。</p><h2 id="sec-5" class="doc-h1">委托 02 · 停在十八岁的女孩<a class="anchor" href="#sec-5">#</a></h2><p>委托人：苏瑶（临港市，35岁）</p><p>现象：妹妹苏琳今年32岁，但外貌、骨骼、牙齿、细胞年龄全部停在18岁，已持续14年。苏瑶还提到临港市2048年搞过一次「成人礼」，所有孩子都要参加；她形容妹妹「就像原版被收走、留下的一份备份」。</p><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>32 / 年龄 / 18</td><td>苏琳真实年龄应为32岁；临港市2034年有一批新生儿被登记为「无出生档案」</td></tr><tr><td>成人礼</td><td>2048年临港市青少年评估制度，辰天生物与卫生局联合推行；未通过者「海外深造」，记录全空白</td></tr><tr><td>备份 / 复制体</td><td>每个新生儿都有备份；原体未过评估则备份被「保留」。苏琳是被保留的备份体</td></tr><tr><td>苏琳 / 苏瑶</td><td>苏琳没有出生档案，父母拒谈2048年</td></tr></table></div><p>正确分类：目击</p><p class="doc-note">协会内部备注：涉及成人礼制度 · 苏琳为被保留的备份体 · 建议升级保密。</p><h2 id="sec-6" class="doc-h1">委托 03 · 被删除的第十三条<a class="anchor" href="#sec-6">#</a></h2><p>委托人：水底针（匿名用户）</p><p>现象：所有含同一组数字的帖子都在发布后 23 分钟内被删。这组数字出现12次，第13次没有被删——是被替换了。</p><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>07 / 缺失 / 编号</td><td>编号01–13中少了07；07状态「未注销」，2066年10月后重新激活，原归属辰天集团·生命延续中心</td></tr><tr><td>协议 / 23 / 沉默</td><td>第23号协议「沉默协议」，23分钟内清除特定信息，辰天集团法务部起草</td></tr><tr><td>守夜人 / 管理员</td><td>协会内部特殊岗位，清理「不该被记住的人」信息，在职人数1</td></tr><tr><td>水底针 / 论坛</td><td>注册于2054年，最早系统追踪被删帖子的用户</td></tr></table></div><p>正确分类：遗物</p><p class="doc-note">协会内部备注：07号未注销 · 沉默协议正在执行 · 建议持续监测。</p><h2 id="sec-7" class="doc-h1">委托 04 · 镜子里多出来的影子<a class="anchor" href="#sec-7">#</a></h2><p>委托人：小林（东里市，19岁，大学生）</p><p>现象：红星巷废弃穿衣镜，每天16:44镜中多出一个穿校服的少年在翻书。小林拍照后手机自动格式化。</p><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>1644 / 16:44 / 4:44</td><td>1998年10月15日16:44红星巷火灾，18岁少年死于旧书店；地块产权方辰天置业</td></tr><tr><td>19981015 / 1998</td><td>编号CLC-1998-1015-A于1998年注销，原因「未通过成人礼」，备份体同年被冻结</td></tr><tr><td>备份体 / 残留意识</td><td>镜子是「残留意识」载体，红星巷那面镜子附着7段残留意识</td></tr><tr><td>红星巷 / 镜子</td><td>老城区，1987/1998/2066三次镜面异常都在10月</td></tr></table></div><p>正确分类：地点</p><p class="doc-note">协会内部备注：确认镜像类地点 · 7段残留意识附着 · 建议封锁区域。</p><h2 id="sec-8" class="doc-h1">委托 05 · 没有正门的房子<a class="anchor" href="#sec-8">#</a></h2><p>委托人：匿名地图编辑者</p><p>现象：一个坐标点，在部分地图显示为「回声研究所」，在另一些地图上显示为空白。2066年11月之前不存在于任何地图。协会调出2066年11月的旧地图快照，角落印着一行模糊坐标：<em class="hl">39°55′□□″N 116°26′□□″E</em>（分秒位被水渍晕开）——这是坐标关键词的出处。</p><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>39°55 / 116°26</td><td>坐标命中 39°55′48″N 116°26′42″E；2066年10月15日前登记在辰天集团名下</td></tr><tr><td>档案夹层 / 夹层</td><td>档案系统中的虚拟空间，需档案管理员权限；回声研究所是唯一已知设施</td></tr><tr><td>回声会 / 2055</td><td>2055年成立的地下组织，任务「守护档案馆夹层中的回声研究所」；2066年10月15日后建立回声研究所</td></tr><tr><td>回声研究所</td><td>公开网络查无；坐标与东里市档案馆分馆相距约4.7公里——正是委托01那台录音机的旧址</td></tr></table></div><p>正确分类：地点</p><p class="doc-note">协会内部备注：档案夹层设施 · 回声会建立 · 建议移交回声会事务组。</p><h2 id="sec-9" class="doc-h1">委托 06 · 从不下班的同事<a class="anchor" href="#sec-9">#</a></h2><p>委托人：匿名（协会内部投递）</p><p>现象：协会3楼最里面的工位，每天早上都有一杯还热的咖啡。监控显示每天18:00有人打卡离开，但门禁记录里查不到这个人。委托人去过人事部查登记，对方只回「该工位信息不对外」；他还提到档案室的椅子明明只有6把，但每天早上总觉得多了一把（彩蛋线索「椅子」的引导）。</p><blockquote>「我数过了。那杯咖啡从来没人喝。但它每天早上都是热的。」</blockquote><p>搜索关键词（4 条必找，另有 1 条彩蛋）</p><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>咖啡 / 叙旧</td><td>「叙旧」牌速溶咖啡，2066年11月才注册商标，唯一供货方辰天集团后勤部；协会从未采购过</td></tr><tr><td>门禁 / 打卡 / 监控</td><td>协会门禁与辰天集团安保是同一套系统，数据双向同步，协会无权查原始日志</td></tr><tr><td>借调 / 人事</td><td>协会自2055年起所有员工档案均标注「辰天集团借调人员」，累计 1,244 人次</td></tr><tr><td>07 / 工位</td><td>3楼07号工位，工位牌空白，归属人为「——」；2066年10月起标记为「保留」</td></tr><tr><td>椅子（彩蛋）</td><td>档案室6把椅子，每天早上多出第7把，椅面温度36.5℃</td></tr></table></div><p>模糊提示：那个工位，为什么没有人记得它属于谁？</p><p>正确分类：目击</p><p class="doc-note">协会内部备注：那个工位从来没人坐过。但每天都有人来上班。备注：07号工位自2066年10月起被标记为「保留」。</p><h2 id="sec-10" class="doc-h1">委托 07 · 会自己长大的房间<a class="anchor" href="#sec-10">#</a></h2><p>委托人：周女士（东里市老城区，房东）</p><p>现象：一间出租屋，14年里面积从18㎡变成32㎡。每次测绘结果都不同，墙体却没有施工痕迹。屋子前前后后换过七任租客，都说走就走，押金也没回来拿。</p><blockquote>「我量了三次。第一次18平，第二次25平，昨天量是32平。我没装修。它自己长的。」</blockquote><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>18 / 面积</td><td>2048年首次测绘记录为18㎡，测绘方是辰天测绘</td></tr><tr><td>测绘 / 报告</td><td>测绘报告编号连续，从 CT-SURVEY-2048-001 到 CT-SURVEY-2048-127</td></tr><tr><td>租客 / 租户</td><td>历任租客共7人，全部登记为「海外深造归国人员」，但无任何入境记录</td></tr><tr><td>2048 / 成人礼</td><td>2048年是临港市「成人礼」制度启动年，同年辰天测绘成立</td></tr></table></div><p>模糊提示：量一量。它到底变大了多少？</p><p>正确分类：地点</p><p class="doc-note">协会内部备注：房间不是变大了。是有东西，被放了进来。该地址与「档案夹层」的物理投影特征一致。</p><h2 id="sec-11" class="doc-h1">委托 08 · 凌晨四点的电台<a class="anchor" href="#sec-11">#</a></h2><p>委托人：李师傅（东里市，出租车司机）</p><p>现象：凌晨4:00把收音机调到124.4 MHz，会收到一个不存在的电台。主播在念名字，一夜不停，最后一句永远是「我记住了」。</p><blockquote>「我听了三个晚上。他念的名字，一个都没重复。我数到第300个就睡着了。」</blockquote><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>124.4 / 频段 / 频率</td><td>该频段在2066年10月15日之后才被记录到，此前为空频；不在任何无线电管理机构登记范围</td></tr><tr><td>主播 / 声纹</td><td>声纹比对与协会员工「温言」相似度 99.7%</td></tr><tr><td>名字 / 1244 / 名单</td><td>每夜循环 1,244 个名字，顺序固定，从不重复出错</td></tr><tr><td>四点 / 4:00 / 备份</td><td>4:00是回声研究所母体档案库的每日自动备份时间</td></tr></table></div><p>模糊提示：听听那个频段里的数字。</p><p>正确分类：声音（新增类型）</p><p class="doc-note">协会内部备注：你不是在听电台。是电台在等你听见。该频段不在任何无线电管理机构的登记范围内。</p><h2 id="sec-12" class="doc-h1">委托 09 · 一百二十七个签名<a class="anchor" href="#sec-12">#</a></h2><p>委托人：陈老师（临港市，退休教师）</p><p>现象：2048年一份家长同意书被翻出，上面有127个签名。127个孩子都在同年「出国深造」后失联，而127个签名的笔迹完全一致。</p><blockquote>「我教了三十年书。我认得每一个家长的笔迹。但这127个签名，是同一个人写的。」</blockquote><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>127 / 名单</td><td>127名学生名单，档案状态全部为「已处置」</td></tr><tr><td>签名 / 笔迹 / 同意书</td><td>笔迹鉴定显示127个签名出自同一人之手，签名者身份栏空白</td></tr><tr><td>CT-CONSENT / 法务</td><td>文件编号 CT-CONSENT-2048，起草方是辰天集团法务部</td></tr><tr><td>2048 / 成人礼</td><td>与「成人礼」同年，127人是第一批「未通过评估」的青少年</td></tr></table></div><p>模糊提示：数一数，有多少个名字。</p><p>正确分类：群体（新增类型）</p><p class="doc-note">协会内部备注：127个名字。127段意识。备注：这是回声研究所记录在案的第一批「原料」。</p><h2 id="sec-13" class="doc-h1">隐藏委托 · 第二次入职<a class="anchor" href="#sec-13">#</a></h2><p>触发条件：完成任意 4 个委托后，通讯中收到一条没有发件人的消息。</p><blockquote>「你去查一下你自己的入职记录。」</blockquote><p>委托人：未知</p><p>现象：协会人事系统里有一份 2066-10-15 23:59 的入职记录。姓名「温言」。照片栏空白，指纹栏空白，籍贯栏：东里市。</p><div class="tbl-wrap"><table><tr><th>关键词</th><th>线索</th></tr><tr><td>入职 / 记录</td><td>记录创建时间 2066-10-15 23:59，创建者是辰天集团首席技术官办公室</td></tr><tr><td>20661015 / 2066-10-15</td><td>这一天发生三件事：仓库行动、1,244份意识被捕捉、温言被创建</td></tr><tr><td>照片 / 指纹</td><td>照片栏不是空白，是文件大小为 0 KB</td></tr><tr><td>温言</td><td>检索「温言」返回档案编号 /internal/echo/archive/wenyan/，文件大小 0 KB</td></tr></table></div><p>模糊提示：翻回你入职的那一天。</p><p>正确分类：遗物</p><p class="doc-note">协会内部备注：你的入职日期，就是你的生日。而你的生日，是 1,244 个人的忌日。</p><p>完成后效果：白色房间第一段系统信息中会多出一行创建日志——</p><pre class="doc-mono">[2066-10-15 23:59] 账号 wenyan 创建成功</pre><p class="doc-note">这是关键的「提前知情」设计：如果你先做了隐藏委托，在反转发生前就已经见过「温言被创建」这一事实。</p><h2 id="sec-14" class="doc-h1">委托 10 · 辰天集团的服务器（自动触发）<a class="anchor" href="#sec-14">#</a></h2><p>委托人：未知（完成全部 9 个主线委托后自动进入）</p><p>转场：屏幕被黑底绿字的入侵界面接管，打字机播报留言，点击「进入服务器」开始。</p><h3 class="doc-h2">三层密码 + 最终检索</h3><div class="tbl-wrap"><table><tr><th>层级</th><th>密文</th><th>提示</th><th>答案</th></tr><tr><td>第一层</td><td>VHQWLQHO</td><td>将军把字母往后移三位（凯撒 -3）</td><td>SENTINEL</td></tr><tr><td>第二层</td><td>CTHNINEA</td><td>猎人用 3 个栅栏圈养猎物（栅栏密码 · 3 栏）</td><td>CHENTIAN</td></tr><tr><td>第三层</td><td>OGFY</td><td>维吉尼亚密码 · 密钥 KEY</td><td>ECHO</td></tr><tr><td>最终检索</td><td>—</td><td>输入要检索的名字</td><td>温言</td></tr></table></div><p class="doc-note">第二层密文按 3 轨栅栏解码：CT | HNIN | EA 三轨交错，还原为 CHENTIAN。</p><p>入侵完成后，工作区出现「📮 发送文档」按钮，点击进入白色房间。</p><h2 id="sec-15" class="doc-h1">白色房间 · 反转<a class="anchor" href="#sec-15">#</a></h2><p>发送文档后自动进入。系统逐行揭示：</p><pre class="doc-mono">项目编号：CT-ECHO-1244</pre><pre class="doc-mono">当前登录账号：温言 / 账号类型：合成意识</pre><pre class="doc-mono">创建时间：2066-10-15 23:59</pre><pre class="doc-mono">意识来源：1,244 份「海外深造」残留意识碎片</pre><p>温言不是真人——是 1,244 份「海外深造」残留意识合成的个体。辰天集团建造了回声研究所，也建造了协会和温言。</p><p class="doc-note">文本播报约需 19 秒，右上角有「⏭ 跳过」按钮可立即看完整段。</p><h2 id="sec-16" class="doc-h1">四结局<a class="anchor" href="#sec-16">#</a></h2><div class="tbl-wrap"><table><tr><th>选项</th><th>结局</th><th>内容</th></tr><tr><td>协会员工档案</td><td>结局 A · 归档者</td><td>继续做温言，成为最优秀的调查员，深夜听到07号念编号</td></tr><tr><td>水底针的私信</td><td>结局 B · 泄密者</td><td>真相发到暗涌论坛，存活23分钟，1,244人看到；水底针置顶「07号，我记住了」</td></tr><tr><td>删除键</td><td>结局 C · 消失者</td><td>抹掉自己，1,244段意识回归档案夹层；三个月后旧书店出现「07号。他还活着。」</td></tr><tr><td>（什么也不选）</td><td>结局 D · 追问者</td><td>隐藏结局。01号母体上线，07号现身：「你是第一个活过来的。」</td></tr></table></div><p>结局页按钮：「重新开始」重置全部进度；「↩ 重新选择结局」可回到白色房间重选分支。</p><p>作者寄语：本期暂不开放。</p><h2 id="sec-17" class="doc-h1">贯穿全作的三条数字线<a class="anchor" href="#sec-17">#</a></h2><div class="tbl-wrap"><table><tr><th>数字</th><th>含义</th><th>出现位置</th></tr><tr><td>127</td><td>第一批「原料」</td><td>委托 07（测绘编号 001–127）、委托 09（127 个签名）</td></tr><tr><td>1,244</td><td>总数</td><td>委托 06（借调 1,244 人次）、委托 08（1,244 个名字）、白色房间反转</td></tr><tr><td>07</td><td>唯一幸存者</td><td>委托 03（07 号编号未注销）、委托 06（07 号工位保留）、结局 A / 结局 D</td></tr></table></div><p>其他伏笔：</p><ul><li>委托 07 的测绘编号连续到 127，与委托 09 的 127 人对应。</li><li>委托 08 的频段 124.4、声纹相似度 99.7%、4:00 自动备份。</li><li>委托 09 与委托 03 同为「辰天集团法务部」起草——沉默协议与同意书出自同一部门。</li><li>隐藏委托的创建时间 2066-10-15 23:59，即温言的生日＝1,244 人的忌日。</li></ul><h2 id="sec-18" class="doc-h1">注意事项<a class="anchor" href="#sec-18">#</a></h2><ul><li>所有搜索关键词都能在游戏内已见文本中找到出处（本委托现象描述、已找到的线索或前面委托），无需场外猜测。</li><li>每条线索都要求找齐才可提交（委托 06 共 5 条线索，其中「椅子」是彩蛋，找齐 4 条即可提交）。</li><li>分类必须正确，错误会被拒绝并提示重试，不会消耗任何进度。</li><li>搜索没命中时，简单难度会给出模糊提示；普通难度没有任何提示。</li><li>9 个主线委托依次解锁（完成上一份才解锁下一份）；委托 10 不在列表中，完成全部 9 个主线委托后自动触发。</li><li>隐藏委托需完成任意 4 个委托后由通讯消息触发，完成后会改写白色房间的日志。</li><li>已归档的委托可以随时点开回看（只读，不可重复提交）。</li><li>本作没有星元 / 报酬系统。</li></ul><h2 id="sec-19" class="doc-h1">通关时长参考<a class="anchor" href="#sec-19">#</a></h2><div class="tbl-wrap"><table><tr><th>段落</th><th>预计时长</th></tr><tr><td>序章</td><td>约 5 分钟</td></tr><tr><td>委托 01–05</td><td>约 44 分钟</td></tr><tr><td>委托 06–09</td><td>约 26 分钟</td></tr><tr><td>隐藏委托</td><td>约 4 分钟</td></tr><tr><td>委托 10（终章）</td><td>约 12 分钟</td></tr><tr><td>反转</td><td>约 6 分钟</td></tr><tr><td>结局</td><td>约 4 分钟</td></tr><tr><td>合计</td><td>约 101 分钟</td></tr></table></div>
+    <p class="toc-guide-note">本作内容纯属虚构 · 与《完全攻略.docx》内容同步生成</p>
+  </main>
+</div>
+
+</body>
+</html>
