@@ -19,9 +19,9 @@
   --danger:      #c0392b;
   --green:       #4a6b3a;
   --blue:        #3a5a7a;
-  --font-serif:  "Songti SC", "STSong", "SimSun", Georgia, serif;
-  --font-sans:   -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-mono:   "SF Mono", "Cascadia Code", Consolas, monospace;
+  --font-serif:  "SimHei", "黑体", "Microsoft YaHei", sans-serif;
+  --font-sans:   "SimHei", "黑体", "Microsoft YaHei", sans-serif;
+  --font-mono:   "SimHei", "黑体", "Microsoft YaHei", sans-serif;
   --shadow-sm:   0 2px 6px rgba(30, 20, 10, 0.18);
   --shadow-md:   0 6px 20px rgba(30, 20, 10, 0.28);
   --shadow-lg:   0 18px 50px rgba(20, 12, 6, 0.45);
@@ -279,6 +279,17 @@ input { font-family: var(--font-sans); }
 #work-area::-webkit-scrollbar-track { background: #e8dcc4; }
 #work-area::-webkit-scrollbar-thumb {
   background: #b8a880; border-radius: 5px; border: 2px solid #e8dcc4;
+}
+/* 委托列表 / 协会通讯：沉浸式滚动条（平时隐形，悬停浮现） */
+#case-items, #chat-log { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+#case-items:hover, #chat-log:hover { scrollbar-color: rgba(138,58,42,.35) transparent; }
+#case-items::-webkit-scrollbar, #chat-log::-webkit-scrollbar { width: 5px; }
+#case-items::-webkit-scrollbar-track, #chat-log::-webkit-scrollbar-track { background: transparent; }
+#case-items::-webkit-scrollbar-thumb, #chat-log::-webkit-scrollbar-thumb {
+  background: transparent; border-radius: 3px; transition: background .2s;
+}
+#case-items:hover::-webkit-scrollbar-thumb, #chat-log:hover::-webkit-scrollbar-thumb {
+  background: rgba(138,58,42,.3);
 }
 .work-empty {
   height: 100%; display: flex; flex-direction: column;
@@ -739,7 +750,7 @@ input { font-family: var(--font-sans); }
 .hack-interface {
   background: #0a0e1a;
   color: #4af0c0;
-  font-family: "Courier New", "Consolas", monospace;
+  font-family: "SimHei", "黑体", sans-serif;
   padding: 0;
   min-height: 600px;
   display: flex;
@@ -896,7 +907,7 @@ input { font-family: var(--font-sans); }
   border-radius: 4px;
   padding: 10px 16px;
   font-size: 16px;
-  font-family: "Courier New", monospace;
+  font-family: "SimHei", "黑体", sans-serif;
   color: #4af0c0;
   text-align: center;
   width: 260px;
@@ -912,7 +923,7 @@ input { font-family: var(--font-sans); }
   border: 1px solid #4af0c0;
   color: #4af0c0;
   padding: 8px 24px;
-  font-family: "Courier New", monospace;
+  font-family: "SimHei", "黑体", sans-serif;
   font-size: 14px;
   cursor: pointer;
   letter-spacing: 2px;

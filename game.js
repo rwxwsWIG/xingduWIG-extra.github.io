@@ -88,7 +88,7 @@ const TUTORIAL_STEPS = [
   },
   {
     title: "最后 · 开始工作",
-    body: `<p>右侧聊天区里，主管<b>常姐</b>会在关键时刻给你提示——留意她的消息。</p>
+    body: `<p>右侧聊天区里，主管<b>TC001</b>会在关键时刻给你提示——留意她的消息。</p>
       <p>难度决定检索提示的多少，不影响剧情。<b>不要追问</b>，是这里唯一的规矩。</p>
       <p class="tu-tip">培训结束。左侧选择「委托 01」，开始你的第一份工作。</p>`,
   },
@@ -122,7 +122,7 @@ function enterDesk() {
     pushChat("sys", "", "系统记录：受访者第5题回答已存档。");
   }, 600);
   setTimeout(() => {
-    pushChat("people", "常姐", "第5题不用认真填。所有新人都不记得自己最早的画面。这是我们这份工作的职业病。");
+    pushChat("people", "TC001", "第5题不用认真填。所有新人都不记得自己最早的画面。这是我们这份工作的职业病。");
   }, 1600);
   setTimeout(() => toast("✦ 欢迎入职", "从左侧选择「委托 01」开始工作。", "", 6000), 2600);
 }
@@ -242,10 +242,10 @@ const CASES = [
     quote: "「他不是我，也不是任何我认识的人。他看起来很年轻。」",
     briefAfter: ["小林提供了一张照片：镜面反射中，有一个穿着校服的少年。照片拍摄后，他的手机自动格式化了。"],
     clues: [
-      { key: ["1644", "16:44", "444", "4:44"], text: "1998 年 10 月 15 日 <b>16:44</b>，东里市红星巷发生火灾。一名 18 岁少年在巷内旧书店死亡。少年姓名已涂黑。备注：红星巷地块的产权方为<b>辰天置业</b>。", source: "协会档案 · 事故记录" },
-      { key: ["19981015", "1998", "1015"], text: "编号 <b>CLC-1998-1015-A</b> 已于 1998 年注销。注销原因：未通过成人礼。备注：该编号的<b>备份体</b>于同年被冻结。冻结执行方：<b>辰天生物</b>。", source: "协会档案 · 编号记录" },
+      { key: ["1644", "16:44", "444", "4:44"], text: "2048 年 10 月 15 日 <b>16:44</b>，东里市红星巷发生火灾。一名 18 岁少年在巷内旧书店死亡。少年姓名已涂黑。备注：红星巷地块的产权方为<b>辰天置业</b>。", source: "协会档案 · 事故记录" },
+      { key: ["20481015", "2048", "1015"], text: "编号 <b>CLC-2048-1015-A</b> 已于 2048 年注销。注销原因：未通过成人礼。备注：该编号的<b>备份体</b>于同年被冻结。冻结执行方：<b>辰天生物</b>。", source: "协会档案 · 编号记录" },
       { key: ["备份体", "残留意识", "残留"], text: "镜子是「残留意识」的附着载体。当某个备份体被冻结时，它的意识会附着在最后出现过的物理空间。东里市红星巷的那面镜子，一共附着 <b>7 段</b>残留意识。备注：辰天集团曾试图收购该地块，但被协会以「现象研究」名义阻挠。", source: "协会档案 · 术语表" },
-      { key: ["红星巷", "镜子", "镜面"], text: "红星巷位于东里市老城区。协会档案记录：1987、1998、2066 年，红星巷共出现三次「镜面异常」。每次都在 10 月。", source: "协会档案 · 镜像类" },
+      { key: ["红星巷", "镜子", "镜面"], text: "红星巷位于东里市老城区。协会档案记录：1987、2048、2066 年，红星巷共出现三次「镜面异常」。每次都在 10 月。", source: "协会档案 · 镜像类" },
     ],
     minClues: 4,
     classify: CLASSIFY_OPTS,
@@ -362,36 +362,6 @@ const CASES = [
     conclusion: "你不是在听电台。是电台在等你听见。该频段不在任何无线电管理机构的登记范围内。",
   },
   {
-    id: "c09", num: "委托 09",
-    title: "一百二十七个签名",
-    type: "群体", client: "陈老师（临港市，退休教师）",
-    date: "2067-03-04",
-    brief: [
-      "2048 年的一份家长同意书被翻了出来，上面有 <b>127 个签名</b>。",
-      "127 个孩子都在同年「出国深造」，之后再无音讯。",
-      "而这 <b>127 个签名的笔迹，完全一致</b>。",
-    ],
-    quote: "「我教了三十年书。我认得每一个家长的笔迹。但这 127 个签名，是同一个人写的。」",
-    briefAfter: ["陈老师补了一句：「我数过三遍。127 个。一个不多，一个不少。」"],
-    hint: "数一数，有多少个名字。",
-    clues: [
-      { key: ["127", "名单", "一百二十七"], text: "<b>127</b> 名学生名单，档案状态全部为「<b>已处置</b>」。", source: "协会档案 · 学生名册" },
-      { key: ["签名", "笔迹", "同意书"], text: "笔迹鉴定显示，127 个签名<b>出自同一人之手</b>。签名者身份栏空白。", source: "协会档案 · 笔迹鉴定" },
-      { key: ["CT-CONSENT", "起草", "法务"], text: "文件编号 <b>CT-CONSENT-2048</b>。起草方是<b>辰天集团法务部</b>。", source: "协会档案 · 文件溯源" },
-      { key: ["2048", "成人礼", "第一批"], text: "与「成人礼」同年。<b>127 人是第一批「未通过评估」的青少年</b>。", source: "协会档案 · 制度年表" },
-    ],
-    minClues: 4,
-    classify: [
-      { id: "obj", name: "遗物", desc: "物件本身异常" },
-      { id: "sight", name: "目击", desc: "只有特定视角捕捉到" },
-      { id: "place", name: "地点", desc: "异常附着在特定空间" },
-      { id: "sound", name: "声音", desc: "只有声音，没有实体" },
-      { id: "group", name: "群体", desc: "与一群人相关" },
-    ],
-    answer: "group",
-    conclusion: "127 个名字。127 段意识。备注：这是回声研究所记录在案的第一批「原料」。",
-  },
-  {
     id: "c10h", num: "隐藏委托",
     title: "第二次入职",
     type: "遗物", client: "未知",
@@ -420,6 +390,37 @@ const CASES = [
     ],
     answer: "obj",
     conclusion: "你的入职日期，就是你的生日。而你的生日，是 1,244 个人的忌日。",
+  },
+  {
+    id: "c09", num: "委托 09",
+    title: "一百二十七个签名",
+    type: "群体", client: "陈老师（临港市，退休教师）",
+    date: "2067-03-04",
+    brief: [
+      "2048 年的一份家长同意书被翻了出来，上面有 <b>127 个签名</b>。",
+      "127 个孩子都在同年「出国深造」，之后再无音讯。",
+      "而这 <b>127 个签名的笔迹，完全一致</b>。",
+    ],
+    quote: "「我教了三十年书。我认得每一个家长的笔迹。但这 127 个签名，是同一个人写的。」",
+    briefAfter: ["陈老师补了一句：「我数过三遍。127 个。一个不多，一个不少。」",
+      "他还记得一个细节：「同意书右下角印着一行以 <b>CT-CONSENT</b> 开头的编号。我去问过教育局，对方只说这份文件是辰天集团的<b>法务</b>部起草的。」"],
+    hint: "数一数，有多少个名字。",
+    clues: [
+      { key: ["127", "名单", "一百二十七"], text: "<b>127</b> 名学生名单，档案状态全部为「<b>已处置</b>」。", source: "协会档案 · 学生名册" },
+      { key: ["签名", "笔迹", "同意书"], text: "笔迹鉴定显示，127 个签名<b>出自同一人之手</b>。签名者身份栏空白。", source: "协会档案 · 笔迹鉴定" },
+      { key: ["CT-CONSENT", "起草", "法务"], text: "文件编号 <b>CT-CONSENT-2048</b>。起草方是<b>辰天集团法务部</b>。", source: "协会档案 · 文件溯源" },
+      { key: ["2048", "成人礼", "第一批"], text: "与「成人礼」同年。<b>127 人是第一批「未通过评估」的青少年</b>。", source: "协会档案 · 制度年表" },
+    ],
+    minClues: 4,
+    classify: [
+      { id: "obj", name: "遗物", desc: "物件本身异常" },
+      { id: "sight", name: "目击", desc: "只有特定视角捕捉到" },
+      { id: "place", name: "地点", desc: "异常附着在特定空间" },
+      { id: "sound", name: "声音", desc: "只有声音，没有实体" },
+      { id: "group", name: "群体", desc: "与一群人相关" },
+    ],
+    answer: "group",
+    conclusion: "127 个名字。127 段意识。备注：这是回声研究所记录在案的第一批「原料」。",
   },
   {
     id: "c10", num: "委托 10",
@@ -630,13 +631,14 @@ const SEARCH_HINTS = {
   c01: ["试试从时间入手。", "想想录音机上的日期。", "七小后来变成了什么？"],
   c02: ["算算她的年龄。", "和成人礼有关？", "临港市的制度？"],
   c03: ["编号缺了谁？", "23分钟意味着什么？", "谁在删帖？"],
-  c04: ["4:44是什么时间？", "1998年发生了什么？", "镜子附着了什么？"],
+  c04: ["4:44是什么时间？", "2048年发生了什么？", "镜子附着了什么？"],
   c05: ["坐标能算出来吗？", "什么是档案夹层？", "谁建了研究所？"],
 };
 
 function doSearch() {
   const q = ($("#search-input").value || "").trim();
   if (!q) { err(); return; }
+  $("#search-input").value = "";   // 搜索后自动清空输入框
   typeWriter();
   const c = CASES[S.activeCase];
   if (!c) { toast("未选择委托", "请先在左侧选择一份委托。", "warn"); return; }
@@ -757,7 +759,6 @@ function renderWork() {
       ${c.finalChoice ? `
       <div class="classifier">
         <div class="cl-title">发送文档</div>
-        <div class="cl-sub">审计报告已生成完毕。</div>
         <button class="btn btn-primary btn-lg" data-action="send-report">
           📮 发送文档
         </button>
@@ -816,7 +817,7 @@ function renderAll() {
 }
 
 /* ================================================================
-   通讯（常姐 / 老周 / 水底针）
+   通讯（TC001 / 老周 / 水底针）
    ================================================================ */
 function pushChat(who, sender, text) {
   S.chat.push({ who, sender, text });
@@ -876,25 +877,25 @@ function selectCase(i) {
   // 首次进入委托 01 时的开场
   if (c.id === "c01" && !has("intro_chat")) {
     S.flags.intro_chat = true;
-    setTimeout(() => pushChat("sys", "", "— 常姐已上线 —"), 400);
-    setTimeout(() => pushChat("people", "常姐", "欢迎入职。我是常姐，你的直属主管。"), 900);
-    setTimeout(() => pushChat("people", "常姐", "规矩只有一条：不要追问。"), 1600);
-    setTimeout(() => pushChat("people", "常姐", "从今天开始，你会看到很多无法解释的东西。你的任务是——记录它们。"), 2400);
-    setTimeout(() => pushChat("people", "常姐", "现在，从委托 01 开始。"), 3200);
+    setTimeout(() => pushChat("sys", "", "— TC001已上线 —"), 400);
+    setTimeout(() => pushChat("people", "TC001", "欢迎入职。我是TC001，你的直属主管。"), 900);
+    setTimeout(() => pushChat("people", "TC001", "规矩只有一条：不要追问。"), 1600);
+    setTimeout(() => pushChat("people", "TC001", "从今天开始，你会看到很多无法解释的东西。你的任务是——记录它们。"), 2400);
+    setTimeout(() => pushChat("people", "TC001", "现在，从委托 01 开始。"), 3200);
   }
 
   // 进入委托 04 时的伏笔
   if (c.id === "c04" && !has("chat_c04")) {
     S.flags.chat_c04 = true;
     setTimeout(() => pushChat("people", "老周", "（私聊）小林那孩子不太对劲。"), 600);
-    setTimeout(() => pushChat("people", "老周", "（私聊）他提供的照片，我看过。红星巷，我在1998年就去过。"), 1400);
+    setTimeout(() => pushChat("people", "老周", "（私聊）他提供的照片，我看过。红星巷，我在2048年就去过。"), 1400);
     setTimeout(() => pushChat("people", "老周", "（私聊）那时候巷子里还是旧书店。"), 2200);
   }
 
   // 完成委托 05 后（再次点开时）的过渡台词：后续委托依次解锁
   if (c.id === "c05" && has("done_c05") && !has("unlock_0609")) {
     S.flags.unlock_0609 = true;
-    setTimeout(() => pushChat("people", "常姐", "后面这批委托，一份一份来。别跳。"), 600);
+    setTimeout(() => pushChat("people", "TC001", "后面这批委托，一份一份来。别跳。"), 600);
   }
 
   // 进入隐藏委托时的氛围
@@ -942,7 +943,7 @@ function submitCase() {
 
   const label = isHidden(c) ? "" : c.num.split(" ")[1];
   setTimeout(() => {
-    pushChat("people", "常姐", isHidden(c) ? "这份委托……不在我们的登记表上。但我记下了。" : `委托 ${label} 已归档。`);
+    pushChat("people", "TC001", isHidden(c) ? "这份委托……不在我们的登记表上。但我记下了。" : `委托 ${label} 已归档。`);
   }, 400);
 
   if (c.conclusion) {
@@ -958,6 +959,16 @@ function submitCase() {
   setTimeout(() => {
     if (doneCount() >= MAIN_TOTAL) {
       showHackedScreen();
+      return;
+    }
+    // 完成委托后自动切换到下一份（仅主线；下一份已完成则回到空桌面）
+    let nextIdx = null;
+    if (isMain(c)) {
+      const ni = MAIN_IDS.indexOf(c.id) + 1;
+      if (ni < MAIN_TOTAL && !has("done_" + MAIN_IDS[ni])) nextIdx = caseIdx(MAIN_IDS[ni]);
+    }
+    if (nextIdx !== null) {
+      selectCase(nextIdx);
     } else {
       S.activeCase = null;
       renderAll();
@@ -1283,7 +1294,7 @@ document.addEventListener("click", (e) => {
       selectCase(fi);
     },
     "send-report": () => {
-      $("#work-content").innerHTML = '<div class="case-detail" style="text-align:center;padding:80px 0"><div style="font-family:var(--font-serif);font-size:20px;letter-spacing:4px;color:var(--ink);margin-bottom:10px">审计报告已发送</div><div style="font-size:13px;color:var(--ink-dim);font-family:var(--font-mono)">正在归档……</div></div>';
+      $("#work-content").innerHTML = '<div class="case-detail" style="text-align:center;padding:80px 0"><div style="font-family:var(--font-serif);font-size:20px;letter-spacing:4px;color:var(--ink);margin-bottom:10px">正在归档……</div></div>';
       beep(440, .4, .05);
       setTimeout(() => showWhiteRoom(), 1800);
     },
